@@ -50,16 +50,13 @@ export function FractalFlower({
       height={size}
       aria-hidden
       className={`${spin && !reduced ? "animate-bloom-spin" : ""} ${className}`}
-      onHoverStart={interactive ? () => setBloomed(true) : undefined}
-      onHoverEnd={interactive ? () => setBloomed(false) : undefined}
-      onClick={
-        interactive
-          ? () => {
-              setBloomed((b) => !b);
-              onBloom?.();
-            }
-          : undefined
-      }
+      onHoverStart={() => interactive && setBloomed(true)}
+      onHoverEnd={() => interactive && setBloomed(false)}
+      onClick={() => {
+        if (!interactive) return;
+        setBloomed((b) => !b);
+        onBloom?.();
+      }}
       animate={{ scale: bloomed ? 1.08 : 1, rotate: bloomed ? 12 : 0 }}
       transition={{ type: "spring", stiffness: 90, damping: 14 }}
       style={{ cursor: interactive ? "pointer" : undefined, overflow: "visible" }}
