@@ -21,7 +21,7 @@ export function LoveNotes({ active }: { active: boolean }) {
       const now = Date.now();
       if (now - lastAt.current < 9000) return;
       lastAt.current = now;
-      const text = loveNotes[idx.current % loveNotes.length];
+      const text = loveNotes[idx.current % loveNotes.length]!;
       idx.current += 1;
       const onLeft = idx.current % 2 === 0;
       setNote({
