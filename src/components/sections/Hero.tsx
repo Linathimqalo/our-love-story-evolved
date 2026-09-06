@@ -5,10 +5,11 @@ import { hero } from "@/data/anniversary";
 import { Petals } from "@/components/atmosphere/Petals";
 import { FractalFlower } from "@/components/atmosphere/FractalFlower";
 
-const line = {
-  hidden: { opacity: 0, y: 22, filter: "blur(6px)" },
-  show: { opacity: 1, y: 0, filter: "blur(0px)" },
-};
+const rise = (delay: number) => ({
+  initial: { opacity: 0, y: 22, filter: "blur(6px)" },
+  animate: { opacity: 1, y: 0, filter: "blur(0px)" },
+  transition: { duration: 1.2, delay, ease: [0.22, 1, 0.36, 1] as const },
+});
 
 export function Hero({ onStart }: { onStart: () => void }) {
   return (
@@ -38,45 +39,33 @@ export function Hero({ onStart }: { onStart: () => void }) {
         className="absolute -bottom-24 -right-24 opacity-20"
       />
 
-      <motion.div
-        initial="hidden"
-        animate="show"
-        transition={{ staggerChildren: 0.55, delayChildren: 0.25 }}
-        className="relative z-10 max-w-3xl text-center text-[oklch(0.99_0.01_40)]"
-      >
-        <motion.h1
-          variants={line}
-          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-          className="text-6xl leading-none sm:text-7xl md:text-8xl"
-        >
+      <div className="relative z-10 max-w-3xl text-center text-[oklch(0.99_0.01_40)]">
+        <motion.h1 {...rise(0.2)} className="text-6xl leading-none sm:text-7xl md:text-8xl">
           {hero.kicker}
         </motion.h1>
 
         <motion.p
-          variants={line}
-          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+          {...rise(0.9)}
           className="mx-auto mt-6 max-w-xl font-serif text-2xl italic leading-snug text-[oklch(0.97_0.02_20)] sm:text-3xl md:text-4xl"
         >
           {hero.headline}
         </motion.p>
 
         <motion.p
-          variants={line}
-          transition={{ duration: 1.1 }}
+          {...rise(1.6)}
           className="mt-10 text-[0.7rem] tracking-[0.45em] uppercase text-[oklch(0.93_0.03_20_/_0.85)]"
         >
           {hero.date}
         </motion.p>
 
         <motion.p
-          variants={line}
-          transition={{ duration: 1.1 }}
+          {...rise(2.1)}
           className="mt-4 font-hand text-2xl text-[oklch(0.96_0.03_10)] sm:text-3xl"
         >
           {hero.greeting}
         </motion.p>
 
-        <motion.div variants={line} transition={{ duration: 1 }} className="mt-12">
+        <motion.div {...rise(2.6)} className="mt-12">
           <button
             type="button"
             onClick={onStart}
@@ -86,7 +75,7 @@ export function Hero({ onStart }: { onStart: () => void }) {
             <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
           </button>
         </motion.div>
-      </motion.div>
+      </div>
     </section>
   );
 }

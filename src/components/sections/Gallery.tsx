@@ -44,7 +44,7 @@ export function Gallery() {
               <motion.button
                 type="button"
                 onClick={() => setIndex(i)}
-                initial={{ rotate: tilts[i % tilts.length] }}
+                initial={{ rotate: tilts[i % tilts.length] ?? 0 }}
                 whileHover={{ rotate: 0, y: -8, scale: 1.02 }}
                 transition={{ type: "spring", stiffness: 130, damping: 15 }}
                 className="block w-full rounded-[1.25rem] bg-white p-3 pb-5 text-left shadow-lift"

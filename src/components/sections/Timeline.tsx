@@ -7,7 +7,7 @@ import { LlamaEgg } from "@/components/eggs/EasterEggs";
 
 export function Timeline() {
   const [open, setOpen] = useState(0);
-  const year = timeline[open];
+  const year = timeline[open] ?? timeline[0]!;
 
   return (
     <section id="journey" className="relative overflow-hidden px-6 py-24 sm:py-32">
