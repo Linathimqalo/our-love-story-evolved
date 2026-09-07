@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { motion } from "motion/react";
 import { ArrowRight } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
@@ -5,13 +6,20 @@ import { hero } from "@/data/anniversary";
 import { Petals } from "@/components/atmosphere/Petals";
 import { FractalFlower } from "@/components/atmosphere/FractalFlower";
 
-const rise = (delay: number) => ({
-  initial: { opacity: 0, y: 22 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 1.2, delay, ease: [0.22, 1, 0.36, 1] as const },
-});
+const FROM = { opacity: 0, y: 22 };
+const TO = { opacity: 1, y: 0 };
+const rise = (delay: number) =>
+  ({ duration: 1.2, delay, ease: [0.22, 1, 0.36, 1] }) as const;
 
-export function Hero({ onStart }: { onStart: () => void }) {
+const T = {
+  kicker: rise(0.2),
+  headline: rise(0.75),
+  date: rise(1.25),
+  greeting: rise(1.6),
+  cta: rise(2),
+};
+
+export const Hero = memo(function Hero({ onStart }: { onStart: () => void }) {
   return (
     <section className="relative flex min-h-[100svh] items-center justify-center overflow-hidden px-6 py-20">
       <img
@@ -40,32 +48,38 @@ export function Hero({ onStart }: { onStart: () => void }) {
       />
 
       <div className="relative z-10 max-w-3xl text-center text-[oklch(0.99_0.01_40)]">
-        <motion.h1 {...rise(0.2)} className="text-6xl leading-none sm:text-7xl md:text-8xl">
+        <motion.h1 initial={FROM} animate={TO} transition={T.kicker} className="text-6xl leading-none sm:text-7xl md:text-8xl">
           {hero.kicker}
         </motion.h1>
 
         <motion.p
-          {...rise(0.75)}
+          initial={FROM}
+          animate={TO}
+          transition={T.headline}
           className="mx-auto mt-6 max-w-xl font-serif text-2xl italic leading-snug text-[oklch(0.97_0.02_20)] sm:text-3xl md:text-4xl"
         >
           {hero.headline}
         </motion.p>
 
         <motion.p
-          {...rise(1.25)}
+          initial={FROM}
+          animate={TO}
+          transition={T.date}
           className="mt-10 text-[0.7rem] tracking-[0.45em] uppercase text-[oklch(0.93_0.03_20_/_0.85)]"
         >
           {hero.date}
         </motion.p>
 
         <motion.p
-          {...rise(1.6)}
+          initial={FROM}
+          animate={TO}
+          transition={T.greeting}
           className="mt-4 font-hand text-2xl text-[oklch(0.96_0.03_10)] sm:text-3xl"
         >
           {hero.greeting}
         </motion.p>
 
-        <motion.div {...rise(2)} className="mt-12">
+        <motion.div initial={FROM} animate={TO} transition={T.cta} className="mt-12">
           <button
             type="button"
             onClick={onStart}
@@ -78,4 +92,4 @@ export function Hero({ onStart }: { onStart: () => void }) {
       </div>
     </section>
   );
-}
+});
