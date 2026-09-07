@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { loveNotes } from "@/data/anniversary";
 
@@ -53,8 +53,10 @@ export function LoveNotes({ active }: { active: boolean }) {
         {note ? (
           <motion.div
             key={note.id}
-            className="absolute w-[min(16rem,50vw)]"
-            style={{ left: `${note.left}%`, top: `${note.top}%` }}
+            className="absolute left-1/2 w-[min(17rem,78vw)] -translate-x-1/2 sm:left-[var(--note-x)] sm:w-[min(16rem,26vw)] sm:translate-x-0"
+            style={
+              { top: `${note.top}%`, "--note-x": `${note.left}%` } as CSSProperties
+            }
             initial={reduced ? { opacity: 0 } : { opacity: 0, y: 28, rotate: -4, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, rotate: note.left > 40 ? 2.5 : -2.5, scale: 1 }}
             exit={{ opacity: 0, y: -22, scale: 0.96 }}
