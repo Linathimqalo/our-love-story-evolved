@@ -27,8 +27,8 @@ export function LoveNotes({ active }: { active: boolean }) {
       setNote({
         id: now,
         text,
-        left: onLeft ? 4 : 62,
-        top: 18 + ((idx.current * 17) % 55),
+        left: onLeft ? 2 : 74,
+        top: 55 + ((idx.current * 11) % 30),
       });
       window.setTimeout(() => setNote(null), 6200);
     };
@@ -53,7 +53,7 @@ export function LoveNotes({ active }: { active: boolean }) {
         {note ? (
           <motion.div
             key={note.id}
-            className="absolute w-[min(17rem,42vw)]"
+            className="absolute w-[min(16rem,50vw)]"
             style={{ left: `${note.left}%`, top: `${note.top}%` }}
             initial={reduced ? { opacity: 0 } : { opacity: 0, y: 28, rotate: -4, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, rotate: note.left > 40 ? 2.5 : -2.5, scale: 1 }}

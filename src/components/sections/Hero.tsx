@@ -6,8 +6,8 @@ import { Petals } from "@/components/atmosphere/Petals";
 import { FractalFlower } from "@/components/atmosphere/FractalFlower";
 
 const rise = (delay: number) => ({
-  initial: { opacity: 0, y: 22, filter: "blur(6px)" },
-  animate: { opacity: 1, y: 0, filter: "blur(0px)" },
+  initial: { opacity: 0, y: 22 },
+  animate: { opacity: 1, y: 0 },
   transition: { duration: 1.2, delay, ease: [0.22, 1, 0.36, 1] as const },
 });
 
@@ -45,27 +45,27 @@ export function Hero({ onStart }: { onStart: () => void }) {
         </motion.h1>
 
         <motion.p
-          {...rise(0.9)}
+          {...rise(0.75)}
           className="mx-auto mt-6 max-w-xl font-serif text-2xl italic leading-snug text-[oklch(0.97_0.02_20)] sm:text-3xl md:text-4xl"
         >
           {hero.headline}
         </motion.p>
 
         <motion.p
-          {...rise(1.6)}
+          {...rise(1.25)}
           className="mt-10 text-[0.7rem] tracking-[0.45em] uppercase text-[oklch(0.93_0.03_20_/_0.85)]"
         >
           {hero.date}
         </motion.p>
 
         <motion.p
-          {...rise(2.1)}
+          {...rise(1.6)}
           className="mt-4 font-hand text-2xl text-[oklch(0.96_0.03_10)] sm:text-3xl"
         >
           {hero.greeting}
         </motion.p>
 
-        <motion.div {...rise(2.6)} className="mt-12">
+        <motion.div {...rise(2)} className="mt-12">
           <button
             type="button"
             onClick={onStart}
