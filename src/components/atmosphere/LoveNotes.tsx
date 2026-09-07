@@ -51,22 +51,23 @@ export function LoveNotes({ active }: { active: boolean }) {
     <div aria-live="polite" className="pointer-events-none fixed inset-0 z-30">
       <AnimatePresence>
         {note ? (
-          <motion.div
+          <div
             key={note.id}
             className="absolute left-1/2 w-[min(17rem,78vw)] -translate-x-1/2 sm:left-[var(--note-x)] sm:w-[min(16rem,26vw)] sm:translate-x-0"
-            style={
-              { top: `${note.top}%`, "--note-x": `${note.left}%` } as CSSProperties
-            }
-            initial={reduced ? { opacity: 0 } : { opacity: 0, y: 28, rotate: -4, scale: 0.9 }}
-            animate={{ opacity: 1, y: 0, rotate: note.left > 40 ? 2.5 : -2.5, scale: 1 }}
-            exit={{ opacity: 0, y: -22, scale: 0.96 }}
-            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            style={{ top: `${note.top}%`, "--note-x": `${note.left}%` } as CSSProperties}
           >
-            <div className="glass rounded-2xl px-5 py-4">
-              <span className="mb-1 block text-lg leading-none">💌</span>
-              <p className="font-hand text-xl leading-snug text-foreground">{note.text}</p>
-            </div>
-          </motion.div>
+            <motion.div
+              initial={reduced ? { opacity: 0 } : { opacity: 0, y: 28, rotate: -4, scale: 0.9 }}
+              animate={{ opacity: 1, y: 0, rotate: note.left > 40 ? 2.5 : -2.5, scale: 1 }}
+              exit={{ opacity: 0, y: -22, scale: 0.96 }}
+              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <div className="glass rounded-2xl px-5 py-4">
+                <span className="mb-1 block text-lg leading-none">💌</span>
+                <p className="font-hand text-xl leading-snug text-foreground">{note.text}</p>
+              </div>
+            </motion.div>
+          </div>
         ) : null}
       </AnimatePresence>
     </div>
